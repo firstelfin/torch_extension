@@ -12,16 +12,14 @@ h = torch.randn(batch_size, state_size)
 C = torch.randn(batch_size, state_size)
 
 rnn_dict = {
-    "rnn1": LLTM_PY(input_features, state_size)
+    "rnn1": LLTM_PY(input_features, state_size),
     "rnn2": LLTM_C(input_features, state_size)
 }
 
 
-forward = 0
-backward = 0
-
-
 def time_test(rnn="rnn1"):
+    forward = 0
+    backward = 0
     for _ in range(100000):
         start = time.time()
         new_h, new_C = rnn_dict[rnn](X, (h, C))
@@ -34,7 +32,7 @@ def time_test(rnn="rnn1"):
     print('{} Forward: {:.3f} s | Backward {:.3f} s'.format(rnn, forward, backward))
     
 
-if __name__ = "__main__":
+if __name__ == "__main__":
   time_test()
   time_test("rnn2")
   pass
