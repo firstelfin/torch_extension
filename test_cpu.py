@@ -15,6 +15,10 @@ rnn_dict = {
     "rnn1": LLTM_PY(input_features, state_size),
     "rnn2": LLTM_C(input_features, state_size)
 }
+rnn_name = {
+    "rnn1": "(PY)",
+    "rnn2": "(C)"
+}
 
 
 def time_test(rnn="rnn1"):
@@ -29,7 +33,7 @@ def time_test(rnn="rnn1"):
         (new_h.sum() + new_C.sum()).backward()
         backward += time.time() - start
 
-    print('{} Forward: {:.3f} s | Backward {:.3f} s'.format(rnn, forward, backward))
+    print('{} Forward: {:.3f} s | Backward {:.3f} s  {}'.format(rnn, forward, backward, rnn_name[rnn]))
     
 
 if __name__ == "__main__":
