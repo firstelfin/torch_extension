@@ -80,7 +80,7 @@ std::vector<torch::Tensor> lltm_backward(
   auto d_old_h = d_X.slice(/*dim=*/1, 0, state_size);
   auto d_input = d_X.slice(/*dim=*/1, state_size);
 
-  return {d_old_h, d_input, d_weights, d_bias, d_old_cell};
+  return {d_old_h, d_input, d_weights, d_bias, d_old_cell, d_gates};
 }
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
