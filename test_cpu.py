@@ -37,6 +37,6 @@ def time_test(rnn="rnn1"):
     
 
 if __name__ == "__main__":
-  time_test()
-  time_test("rnn2")
-  pass
+    time_test()
+    time_test("rnn2")
+    pass
