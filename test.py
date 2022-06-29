@@ -4,6 +4,10 @@ from lltm_c import LLTM as LLTM_C
 from lltm_py import LLTM as LLTM_PY
 from lltm_cuda import LLTM as LLTM_CUDA
 
+
+assert torch.cuda.is_available()
+cuda_device = torch.device("cuda")  # device object representing GPU
+
 batch_size = 16
 input_features = 32
 state_size = 128
