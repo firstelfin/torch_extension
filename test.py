@@ -53,7 +53,7 @@ def time_test(rnn="rnn1", device="cpu"):
         (new_h.sum() + new_C.sum()).backward()
         backward += time.time() - start
 
-    print('{}   Forward: {:.3f} s | Backward {:.3f} s  {}'.format(rnn, forward, backward, RNN_NAME[rnn]))
+    print('{}   {}   Forward: {:.3f} s | Backward {:.3f} s  {}'.format(device, rnn, forward, backward, RNN_NAME[rnn]))
     
 
 if __name__ == "__main__":
