@@ -2,6 +2,7 @@ import time
 import torch
 from lltm_c import LLTM as LLTM_C
 from lltm_py import LLTM as LLTM_PY
+from lltm_cuda import LLTM as LLTM_CUDA
 
 assert torch.cuda.is_available()
 cuda_device = torch.device("cuda")  # device object representing GPU
@@ -16,11 +17,13 @@ C = torch.randn(batch_size, state_size, device=cuda_device)
 
 rnn_dict = {
     "rnn1": LLTM_PY(input_features, state_size).to(cuda_device),
-    "rnn2": LLTM_C(input_features, state_size).to(cuda_device)
+    "rnn2": LLTM_C(input_features, state_size).to(cuda_device),
+    "rnn3": LLTM_CUDA(input_features, state_size).to(cuda_device)
 }
 rnn_name = {
     "rnn1": "(PY)",
-    "rnn2": "(C)"
+    "rnn2": "(C)",
+    "rnn3": "(CUDA)",
 }
 
 
@@ -37,10 +40,11 @@ def time_test(rnn="rnn1"):
         torch.cuda.synchronize()
         backward += time.time() - start
 
-    print('{} Forward: {:.3f} s | Backward {:.3f} s  {}'.format(rnn, forward, backward, rnn_name[rnn]))
+    print('{}  Forward: {:.3f} s | Backward {:.3f} s  {}'.format(rnn, forward, backward, rnn_name[rnn]))
     
 
 if __name__ == "__main__":
-  time_test()
-  time_test("rnn2")
-  pass
+    time_test()
+    time_test("rnn2")
+    time_test("rnn3")
+    pass
