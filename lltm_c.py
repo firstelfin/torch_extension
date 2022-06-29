@@ -2,7 +2,7 @@ import math
 import torch
 
 # Our module!
-import lltm_cpp
+from lltm import lltm_cpp
 
 class LLTMFunction(torch.autograd.Function):
     @staticmethod
