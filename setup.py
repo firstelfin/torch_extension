@@ -17,7 +17,7 @@ setup(
     cmdclass={'build_ext': BuildExtension},
     package_dir={'': 'lltm'},
     packages=find_packages(where="lltm"),
-    py_modules=["test_cpu", "test_gpu", "test_jit", "lltm_c", "lltm_cuda", "lltm_py", "__init__"],
+    py_modules=["test", "lltm_c", "lltm_cuda", "lltm_py", "__init__"],
     install_requires=["torch"],
     keywords="extensions, cpp_extensions"
 )
