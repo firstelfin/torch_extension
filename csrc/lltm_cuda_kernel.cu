@@ -78,7 +78,7 @@ std::vector<torch::Tensor> lltm_cuda_forward(
   	const int threads = 1024;
   	const dim3 blocks((state_size + threads - 1) / threads, batch_size);
 
-  	AT_DISPATCH_FLOATING_TYPES(gates.type(), "lltm_forward_cuda", ([&] {
+  	AT_DISPATCH_FLOATING_TYPES(gates.options(), "lltm_forward_cuda", ([&] {
     	  lltm_cuda_forward_kernel<scalar_t><<<blocks, threads>>>(
         	  gates.packed_accessor32<scalar_t,3,torch::RestrictPtrTraits>(),
         	  old_cell.packed_accessor32<scalar_t,2,torch::RestrictPtrTraits>(),
@@ -144,7 +144,7 @@ std::vector<torch::Tensor> lltm_cuda_backward(
   	const int threads = 1024;
   	const dim3 blocks((state_size + threads - 1) / threads, batch_size);
 
-  	AT_DISPATCH_FLOATING_TYPES(X.type(), "lltm_backward_cuda", ([&] {
+  	AT_DISPATCH_FLOATING_TYPES(X.options(), "lltm_backward_cuda", ([&] {
     	  lltm_cuda_backward_kernel<scalar_t><<<blocks, threads>>>(
         	  d_old_cell.packed_accessor32<scalar_t,2,torch::RestrictPtrTraits>(),
         	  d_gates.packed_accessor32<scalar_t,3,torch::RestrictPtrTraits>(),
