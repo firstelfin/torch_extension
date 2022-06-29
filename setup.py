@@ -15,9 +15,9 @@ setup(
     url="https://github.com/firstelfin/torch_extension",
     ext_modules=[CppExtension('lltm.lltm_cpp', ['csrc/lltm.cpp']), CUDAExtension("lltm.lltm_cuda", ["csrc/lltm_cuda.cpp", "csrc/lltm_cuda_kernel.cu"])],
     cmdclass={'build_ext': BuildExtension},
-    package_dir={'': 'lltm'},
-    packages=find_packages(where="lltm"),
-    py_modules=["test", "lltm_c", "lltm_cuda", "lltm_py", "__init__"],
+#     package_dir={'': 'lltm'},
+#     packages=find_packages(where="lltm"),
+#     py_modules=["test", "lltm_c", "lltm_cuda", "lltm_py", "__init__"],
     install_requires=["torch"],
     keywords="extensions, cpp_extensions"
 )
